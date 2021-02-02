@@ -1,0 +1,35 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'typer/style.css' %}">
+<script src="{% static 'typer/jquery.js' %}"></script>
+<script src="{% static 'typer/script.js' %}"></script>
+
+<body>
+    <!-- <h3 id="title_text">Typer</h3> -->
+    <p>Press enter</p>
+    <br><br>
+    <div id="quotebox"></div>
+    <br><br>
+    <textarea id="textbox" disabled></textarea>
+    <br><br>
+    <h1 id="counter"></h1>
+    <br><br>
+    <h1 id="count"></h1>
+    <h1 id="asd"></h1>
+
+    <form id="form" action="{% url 'submit' %}" method="post">
+        {% csrf_token %}
+        <input hidden name="speed" id="speed" value="0">
+        <input hidden id="submit" type="submit" value="Submit">
+    </form>
+
+    <h4>Leaderboard</h4>
+    {% if records %}
+    <ul>
+        {% for record in records %}
+        <li>{{ record.speed }} wpm -- {{ record.date }}</a></li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No pervious records are available.</p>
+    {% endif %}
+</body>
