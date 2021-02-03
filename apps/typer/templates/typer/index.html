@@ -1,5 +1,6 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'typer/style.css' %}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 <script src="{% static 'typer/jquery.js' %}"></script>
 <script src="{% static 'typer/script.js' %}"></script>
 
@@ -23,13 +24,16 @@
     </form>
 
     <h4>Leaderboard</h4>
-    {% if records %}
-    <ul>
+    {% if object_list %}
+    <!-- <ul>
         {% for record in records %}
-        <li>{{ record.speed }} wpm -- {{ record.date }}</a></li>
+        <li>{{ record.user.username }} | {{ record.speed }} wpm - {{ record.date }}</a></li>
         {% endfor %}
-    </ul>
+    </ul> -->
+    {% load render_table from django_tables2 %}
+    {% render_table table %}
     {% else %}
+
     <p>No pervious records are available.</p>
     {% endif %}
 </body>
